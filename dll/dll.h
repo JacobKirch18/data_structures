@@ -20,7 +20,8 @@ private:
 public:
 	doubleLL();
 	~doubleLL();
-	void Insert(int);
+	void InsertAtEnd(int);
+	void InsertAtFront(int);
 	void Remove(int);
 	void Print();
 	void PrintReverse();
