@@ -44,21 +44,35 @@ Node* doubleLL::Find(int target) {
 
 }
 
-// inserts a value at the END of the list
-void doubleLL::Insert(int value) {
+void doubleLL::InsertAtEnd(int value) {
 
 	Node* new_node = new Node(value);
 
 	if (head == nullptr) {
-
 		head = tail = new_node;
-
 	}
 	else {
 
 		tail->next = new_node;
 		new_node->prev = tail;
 		tail = new_node;
+
+	}
+
+}
+
+void doubleLL::InsertAtFront(int value) {
+
+
+	Node* new_node = new Node(value);
+
+	if (head == nullptr) {
+		head = tail = new_node;
+	}
+	else {
+
+		new_node->next = head;
+		head = new_node;
 
 	}
 
