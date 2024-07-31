@@ -1,4 +1,4 @@
-#include "dll.h"
+#include "doubleLL.h"
 #include <iostream>
 using namespace std;
 
@@ -34,13 +34,13 @@ doubleLL::~doubleLL() {
 // helper function to find a value in the list
 Node* doubleLL::Find(int target) {
 
-	Node* currentNode = head;
+	Node* current_node = head;
 
-	while (currentNode != nullptr && currentNode->data != target) {
-		currentNode = currentNode->next;
+	while (current_node != nullptr && current_node->data != target) {
+		current_node = current_node->next;
 	}
 
-	return currentNode;
+	return current_node;
 
 }
 
@@ -78,13 +78,36 @@ void doubleLL::InsertAtFront(int value) {
 
 }
 
+void doubleLL::InsertAfter(int value, int location) {
+
+	Node* current_node = Find(location);
+	Node* new_node = new Node(value);
+
+	if (current_node != tail) {
+
+		new_node->next = current_node->next;
+		new_node->prev = current_node;
+		current_node->next->prev = new_node;
+		current_node->next = new_node;
+	
+	}
+	else if (current_node == tail) {
+
+		new_node->prev = current_node;
+		current_node->next = new_node;
+		tail = new_node;
+
+	}
+
+}
+
 void doubleLL::Remove(int value) {
 
-	Node* currentNode = Find(value);
+	Node* current_node = Find(value);
 
-	if (currentNode != nullptr) {
+	if (current_node != nullptr) {
 
-		if (currentNode == head) {
+		if (current_node == head) {
 
 			head = head->next;
 			if (head == nullptr) {
@@ -95,7 +118,7 @@ void doubleLL::Remove(int value) {
 			}
 
 		}
-		else if (currentNode == tail) {
+		else if (current_node == tail) {
 
 			tail = tail->prev;
 			if (tail == nullptr) {
@@ -107,12 +130,12 @@ void doubleLL::Remove(int value) {
 
 		}
 		else {
-			currentNode->next->prev = currentNode->prev;
-			currentNode->prev->next = currentNode->next;
+			current_node->next->prev = current_node->prev;
+			current_node->prev->next = current_node->next;
 
 		}
 
-		delete currentNode;
+		delete current_node;
 
 	}
 	else {
@@ -123,15 +146,15 @@ void doubleLL::Remove(int value) {
 
 void doubleLL::Print() {
 
-	Node* currentNode = head;
+	Node* current_node = head;
 
-	if (currentNode == nullptr) {
+	if (current_node == nullptr) {
 		cout << "list is empty";
 	}
 
-	while (currentNode != nullptr) {
-		cout << currentNode->data << " ";
-		currentNode = currentNode->next;
+	while (current_node != nullptr) {
+		cout << current_node->data << " ";
+		current_node = current_node->next;
 	}
 
 	cout << endl;
@@ -140,15 +163,15 @@ void doubleLL::Print() {
 
 void doubleLL::PrintReverse() {
 
-	Node* currentNode = tail;
+	Node* current_node = tail;
 
-	if (currentNode == nullptr) {
+	if (current_node == nullptr) {
 		cout << "list is empty";
 	}
 
-	while (currentNode != nullptr) {
-		cout << currentNode->data << " ";
-		currentNode = currentNode->prev;
+	while (current_node != nullptr) {
+		cout << current_node->data << " ";
+		current_node = current_node->prev;
 	}
 
 	cout << endl;
