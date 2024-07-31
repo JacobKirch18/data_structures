@@ -22,6 +22,7 @@ public:
 	~doubleLL();
 	void InsertAtEnd(int);
 	void InsertAtFront(int);
+	void InsertAfter(int, int);
 	void Remove(int);
 	void Print();
 	void PrintReverse();
